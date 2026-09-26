@@ -138,8 +138,6 @@ import { JalaliDatePicker } from "persian-rtl-ui";
 2. چه ورودی و خروجی‌ای انتظار می‌رود؟
 3. آیا رفتار موردنظر مخصوص فارسی/ایران/RTL است یا عمومی است؟
 
-Pull Requestهای کوچک و مشخص ترجیح داده می‌شوند.
-
 ---
 
 ## Included in v1.2.0
