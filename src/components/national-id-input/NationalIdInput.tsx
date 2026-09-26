@@ -1,0 +1,5 @@
+import * as React from 'react'
+import { cn } from '../../lib/cn'
+import { isValidIranNationalId,onlyDigits,toPersianDigits } from '../../lib/persian'
+export interface NationalIdInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,'value'|'defaultValue'|'onChange'>{value?:string;defaultValue?:string;onChange?:(value:string,valid:boolean)=>void}
+export const NationalIdInput=React.forwardRef<HTMLInputElement,NationalIdInputProps>(({className,value,defaultValue='',onChange,...props},ref)=>{const [internal,setInternal]=React.useState(onlyDigits(defaultValue).slice(0,10));const current=onlyDigits(value??internal).slice(0,10);return <input {...props} ref={ref} dir="ltr" inputMode="numeric" maxLength={10} value={toPersianDigits(current)} className={cn('h-11 w-full rounded-xl border border-zinc-300 bg-white px-3 text-right tracking-[0.15em] text-zinc-900 outline-none transition focus:border-zinc-900',className)} onChange={e=>{const next=onlyDigits(e.target.value).slice(0,10);if(value===undefined)setInternal(next);onChange?.(next,isValidIranNationalId(next))}}/>});NationalIdInput.displayName='NationalIdInput'
