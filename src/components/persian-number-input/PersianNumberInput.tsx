@@ -1,0 +1,5 @@
+import * as React from 'react'
+import { cn } from '../../lib/cn'
+import { formatPersianNumber,onlyDigits } from '../../lib/persian'
+export interface PersianNumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,'onChange'>{value?:string;defaultValue?:string;onChange?:(value:string)=>void;format?:boolean}
+export const PersianNumberInput=React.forwardRef<HTMLInputElement,PersianNumberInputProps>(({className,value,defaultValue='',onChange,format=true,...props},ref)=>{const [internal,setInternal]=React.useState(onlyDigits(defaultValue));const raw=value!==undefined?onlyDigits(value):internal;const display=format&&raw?formatPersianNumber(raw):raw;return <input {...props} ref={ref} dir="ltr" inputMode="numeric" value={display} className={cn('h-11 w-full rounded-xl border border-zinc-300 bg-white px-3 text-right text-zinc-900 outline-none transition focus:border-zinc-900',className)} onChange={e=>{const next=onlyDigits(e.target.value);if(value===undefined)setInternal(next);onChange?.(next)}}/>});PersianNumberInput.displayName='PersianNumberInput'
