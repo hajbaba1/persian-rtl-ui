@@ -1,0 +1,5 @@
+import * as React from 'react'
+import { PersianNumberInput,type PersianNumberInputProps } from '../persian-number-input'
+import type { CurrencyUnit } from '../../lib/persian'
+export interface CurrencyInputProps extends Omit<PersianNumberInputProps,'onChange'>{unit?:CurrencyUnit;onChange?:(value:number|null)=>void}
+export const CurrencyInput=React.forwardRef<HTMLInputElement,CurrencyInputProps>(({unit='toman',onChange,...props},ref)=><div className="relative"><PersianNumberInput {...props} ref={ref} className="pe-20" aria-label={props['aria-label']??`مبلغ به ${unit==='toman'?'تومان':'ریال'}`} onChange={raw=>onChange?.(raw?Number(raw):null)}/><span className="pointer-events-none absolute inset-y-0 end-3 flex items-center text-sm text-zinc-500">{unit==='toman'?'تومان':'ریال'}</span></div>);CurrencyInput.displayName='CurrencyInput'
